@@ -9,53 +9,87 @@ import { CountDown } from "../components/CountDown";
 import { ChallengeBox } from "../components/ChallengeBox";
 import { CountDownProvider } from "../contexts/CountDownContext";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
-
-interface HomeProps {
+import { Login } from "../components/Login";
+import { Logo } from "../components/Logo";
+import { Welcome } from "../components/Welcome";
+import { LoginProvider } from "../contexts/LoginContext";
+import { useSession } from "next-auth/client";
+interface HomeData {
   level: number;
   currentExperience: number;
   challengesCompleted: number;
 }
 
-export default function Home(props: HomeProps) {
+export default function Home(
+  { level,
+    challengesCompleted,
+    currentExperience
+  }: HomeData) {
+
+  const [session, loading] = useSession()
 
   return (
     <ChallengesProvider
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
+      level={level}
+      currentExperience={currentExperience}
+      challengesCompleted={challengesCompleted}
     >
-      <div className={styles.container}>
-        <Head>
-          <title>Inicio | move.it</title>
-        </Head>
-
-        <ExperienceBar />
-
+      <LoginProvider>
         <CountDownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletedChallenges />
-              <CountDown />
+          {!session && <>
+            <div className={(styles.backLogin)}> )
+              <div className={(styles.containerLogin)}>
+                <Head>
+                  <title>Login | move.it</title>
+                </Head>
+                <section>
+                  <div>
+                    <Logo />
+                  </div>
+                  <div>
+                    <Welcome />
+                    <Login />
+                  </div>
+                </section>
+              </div>
             </div>
-            <div>
-              <ChallengeBox />
+          </>}
+          {session && <>
+            <div className={styles.container}>
+              <Head>
+                <title>Inicio | move.it</title>
+              </Head>
+              <ExperienceBar />
+              <section>
+                <div>
+                  <Profile />
+                  <CompletedChallenges />
+                  <CountDown />
+                </div>
+                <div>
+                  <ChallengeBox />
+                </div>
+              </section>
             </div>
-          </section>
+          </>}
         </CountDownProvider>
-      </div>
-    </ChallengesProvider>
+      </LoginProvider >
+    </ChallengesProvider >
   )
 }
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const { level, currentExperience, challengesCompleted, username } = req.cookies;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
+
+  //const resGitHub = await fetch(`https://api.github.com/users/${username}`)
+  //const user = await resGitHub.json()
 
   return {
     props: {
+      //username: username,
       level: Number(level),
       currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted)
+      challengesCompleted: Number(challengesCompleted),
     }
   }
 }

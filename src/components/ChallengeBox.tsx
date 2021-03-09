@@ -4,13 +4,13 @@ import { CountDownContext } from '../contexts/CountDownContext';
 import styles from '../styles/components/ChallengeBox.module.css'
 export function ChallengeBox() {
   const { activeChallenge, resetChallenge, completeChallenge } = useContext(ChallengesContext);
-  const {resetCountdown} = useContext(CountDownContext);
+  const { resetCountdown } = useContext(CountDownContext);
 
-  function handleChallengeSucceeded(){
+  function handleChallengeSucceeded() {
     completeChallenge()
     resetCountdown();
   }
-  function handleChallengeFailed(){
+  function handleChallengeFailed() {
     resetChallenge();
     resetCountdown();
   }
@@ -43,16 +43,16 @@ export function ChallengeBox() {
           </footer>
         </div>
       ) : (
-          <div className={styles.challengeNotActive}>
-            <strong>
-              Finalize um ciclo para receber um desafio
+        <div className={styles.challengeNotActive}>
+          <strong>
+            Finalize um ciclo para receber um desafio
             </strong>
-            <p>
-              <img src="icons/level-up.svg" alt="Level Up" />
+          <p>
+            <img src="icons/level-up.svg" alt="Level Up" />
               Avance de level completando desafios.
             </p>
-          </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }

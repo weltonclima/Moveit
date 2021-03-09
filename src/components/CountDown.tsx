@@ -36,26 +36,26 @@ export function CountDown() {
           Ciclo encerrado
         </button>
       ) : (
-          <>
-            {isActive ? (
-              <button
-                type="button"
-                className={`${styles.countDownButton} ${styles.countDownButtonActive}`}
-                onClick={resetCountdown}
-              >
-                Abandonar ciclo
-              </button>
-            ) : (
-                <button
-                  type="button"
-                  className={styles.countDownButton}
-                  onClick={startCountdown}
-                >
-                  Iniciar um Ciclo'
-                </button>
-              )}
-          </>
-        )}
+        <>
+          {isActive ? (
+            <button
+              type="button"
+              className={`${styles.countDownButton} ${styles.countDownButtonActive}`}
+              onClick={resetCountdown}
+            >
+              Abandonar ciclo
+            </button>
+          ) : (
+            <button
+              type="button"
+              className={styles.countDownButton}
+              onClick={startCountdown}
+            >
+              Iniciar um Ciclo'
+            </button>
+          )}
+        </>
+      )}
 
 
     </div>
