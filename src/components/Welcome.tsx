@@ -9,7 +9,7 @@ export function Welcome() {
   return (
     <div className={styles.container}>
       <div>
-        <img src="logo.svg" alt="Logo move.it" />
+        <img src="Logo.svg" alt="Logo move.it" />
       </div>
       <strong>{`Bem-vindo ${login.data.name != "" &&
           login.data.name != null ?
