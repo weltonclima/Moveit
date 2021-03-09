@@ -70,7 +70,7 @@ export function ChallengesProvider({
     const challenge = challenges[randomChallengeIndex];
     setActiveChallenge(challenge);
 
-    new Audio('./Notification.mp3').play();
+    //new Audio('./Notification.mp3').play();
 
     if (Notification.permission === 'granted') {
       new Notification('Novo desafio  🎉', {
