@@ -1,14 +1,14 @@
-.container {
-  flex: 1;
-}
+import styled from "styled-components";
 
-.container img {
+export const Container = styled.div`
+
+  img {
   width: 15.75rem;
   height: 3.32rem;
   margin-bottom: 4.2rem;
-}
+  }
 
-.container strong {
+  strong {
   width: 8.35rem;
   height: 2.01rem;
   font-family: Inter;
@@ -18,3 +18,4 @@
   line-height: 2.01rem;
   color: var(--white);
 }
+`;

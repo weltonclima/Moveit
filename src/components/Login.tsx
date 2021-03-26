@@ -1,7 +1,7 @@
-import { useSession, signIn, signOut } from "next-auth/client";
-import { useContext, useEffect, useState, } from 'react'
-import { LoginContext } from '../contexts/LoginContext';
-import styles from '../styles/components/Login.module.css'
+import { signIn } from "next-auth/client";
+import React, { useEffect, useState, } from 'react'
+import { useLoginContext } from "../hooks/useHooks";
+import { Github, User } from "../styles/components/Login";
 
 interface LoginData { }
 
@@ -11,7 +11,7 @@ export function Login({ }: LoginData) {
 
   const { username, setUsername,
     login, setLogin, geGitHub
-  } = useContext(LoginContext)
+  } = useLoginContext()
 
   useEffect(() => {
     const inputValue = document.querySelector('input')
@@ -40,17 +40,15 @@ export function Login({ }: LoginData) {
   }, [username])
 
   return (
-    <div
-      className={styles.container}
-    >
-      <div>
+    <>
+      <Github>
         <img
           src={greenButton && login.data.avatar_url != '' ? login.data.avatar_url : `Github.svg`}
           alt="Imagem Github" id="img-github"
         />
         <small>Faça login com seu Github <br /> para começar</small>
-      </div>
-      <div>
+      </Github>
+      <User>
         <input
           type="text"
           placeholder="Digite seu username"
@@ -64,7 +62,7 @@ export function Login({ }: LoginData) {
         >
           <img src="Vector.svg" alt="Icone do Botão" />
         </button>
-      </div>
-    </div>
+      </User>
+    </>
   )
 }

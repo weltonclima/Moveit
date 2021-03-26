@@ -1,15 +1,14 @@
 import { useSession } from 'next-auth/client';
-import { useContext } from 'react';
-import { ChallengesContext } from '../contexts/ChallengesContext';
-import styles from '../styles/components/Profile.module.css';
+import { useChallengesContext } from '../hooks/useHooks';
+import { Container } from '../styles/components/Profile.';
 
 
 export function Profile() {
-  const { level } = useContext(ChallengesContext);
+  const { level } = useChallengesContext();
   const [session] = useSession()
 
   return (
-    <div className={styles.profileContainer}>
+    <Container>
       <img src={session.user.image} alt={session.user.name} />
       <div>
         <strong>{session.user.name}</strong>
@@ -18,6 +17,6 @@ export function Profile() {
           Level {level}
         </p>
       </div>
-    </div>
+    </Container>
   );
 }

@@ -1,4 +1,6 @@
-.completedChallengesContainer {
+import styled from "styled-components";
+
+export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -6,12 +8,12 @@
   padding-bottom: 1rem;
   border-bottom: 1px solid #d7d8da;
   font-weight: 500;
-}
 
-.completedChallengesContainer span:first-child {
-  font-size: 1.25em;
-}
+  span:first-child {
+    font-size: 1.25em;
+  }
 
-.completedChallengesContainer span:last-child {
-  font-size: 1.5rem;
-}
+  span:last-child {
+    font-size: 1.5rem;
+  }
+`;

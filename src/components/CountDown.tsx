@@ -1,6 +1,5 @@
-import { useContext } from 'react';
-import { CountDownContext } from '../contexts/CountDownContext';
-import styles from '../styles/components/CountDown.module.css';
+import { useCountDownContext } from '../hooks/useHooks';
+import { CountDownButton, CountDownContainer, DivCountDown } from '../styles/components/CountDown';
 
 export function CountDown() {
   const { minutes,
@@ -9,55 +8,53 @@ export function CountDown() {
     isActive,
     resetCountdown,
     startCountdown
-  } = useContext(CountDownContext)
+  } = useCountDownContext()
 
   const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
   const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('');
 
   return (
     <div>
-      <div className={styles.countDownContainer}>
-        <div>
+      <CountDownContainer >
+        <DivCountDown>
           <span>{minuteLeft}</span>
           <span>{minuteRight}</span>
-        </div>
+        </DivCountDown>
         <span>:</span>
-        <div>
+        <DivCountDown>
           <span>{secondLeft}</span>
           <span>{secondRight}</span>
-        </div>
-      </div>
+        </DivCountDown>
+      </CountDownContainer>
 
       {hasFinished ? (
-        <button
+        <CountDownButton
+          isActive={false}
           disabled
-          className={styles.countDownButton}
         >
           Ciclo encerrado
-        </button>
+        </CountDownButton>
       ) : (
         <>
           {isActive ? (
-            <button
+            <CountDownButton
               type="button"
-              className={`${styles.countDownButton} ${styles.countDownButtonActive}`}
+              isActive={true}
               onClick={resetCountdown}
             >
               Abandonar ciclo
-            </button>
+            </CountDownButton>
           ) : (
-            <button
+            <CountDownButton
+              isActive={false}
               type="button"
-              className={styles.countDownButton}
               onClick={startCountdown}
             >
               Iniciar um Ciclo'
-            </button>
+            </CountDownButton>
           )}
         </>
       )}
-
-
     </div>
   );
 }

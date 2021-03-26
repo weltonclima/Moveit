@@ -1,9 +1,9 @@
-import styles from '../styles/components/LogoLogin.module.css'
+import { Container } from '../styles/components/Logo'
 export function Logo() {
   
   return (
-    <div className={styles.container}>
+    <Container>
       <img src="Simbolo.svg" alt="Logo do Login" />
-    </div>
+    </Container>
   )
 }

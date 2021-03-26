@@ -14,6 +14,10 @@ import { Logo } from "../components/Logo";
 import { Welcome } from "../components/Welcome";
 import { LoginProvider } from "../contexts/LoginContext";
 import { useSession } from "next-auth/client";
+import {
+  Container, BackLogin,
+  ContainerLogin
+} from "../styles/pages/Home";
 interface HomeData {
   level: number;
   currentExperience: number;
@@ -36,9 +40,9 @@ export default function Home(
     >
       <LoginProvider>
         <CountDownProvider>
-          {!session && <>
-            <div className={(styles.backLogin)}> )
-              <div className={(styles.containerLogin)}>
+          {!session ? <>
+            <BackLogin>
+              <ContainerLogin>
                 <Head>
                   <title>Login | move.it</title>
                 </Head>
@@ -51,11 +55,10 @@ export default function Home(
                     <Login />
                   </div>
                 </section>
-              </div>
-            </div>
-          </>}
-          {session && <>
-            <div className={styles.container}>
+              </ContainerLogin>
+            </BackLogin>
+          </> : <>
+            <Container>
               <Head>
                 <title>Inicio | move.it</title>
               </Head>
@@ -70,7 +73,7 @@ export default function Home(
                   <ChallengeBox />
                 </div>
               </section>
-            </div>
+            </Container>
           </>}
         </CountDownProvider>
       </LoginProvider >
@@ -78,15 +81,10 @@ export default function Home(
   )
 }
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const { level, currentExperience, challengesCompleted, username } = req.cookies;
-
-
-  //const resGitHub = await fetch(`https://api.github.com/users/${username}`)
-  //const user = await resGitHub.json()
+  const { level, currentExperience, challengesCompleted } = req.cookies;
 
   return {
     props: {
-      //username: username,
       level: Number(level),
       currentExperience: Number(currentExperience),
       challengesCompleted: Number(challengesCompleted),

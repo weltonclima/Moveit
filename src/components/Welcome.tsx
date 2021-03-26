@@ -1,20 +1,19 @@
-import { useContext } from 'react';
-import { LoginContext } from '../contexts/LoginContext';
-import styles from '../styles/components/Welcome.module.css'
+import { useLoginContext } from '../hooks/useHooks';
+import { Container } from '../styles/components/Welcome';
 export function Welcome() {
-  const { login } = useContext(LoginContext)
+  const { login } = useLoginContext()
   function username() {
 
   }
   return (
-    <div className={styles.container}>
+    <Container>
       <div>
         <img src="Logo.svg" alt="Logo move.it" />
       </div>
       <strong>{`Bem-vindo ${login.data.name != "" &&
-          login.data.name != null ?
-          login.data.name : ""}`
+        login.data.name != null ?
+        login.data.name : ""}`
       }</strong>
-    </div>
+    </Container>
   );
 }

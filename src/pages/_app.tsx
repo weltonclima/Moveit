@@ -1,12 +1,14 @@
 import { Provider } from 'next-auth/client';
 import React from 'react';
-import '../styles/global.css';
+import { GlobalStyle } from '../styles/global';
+
 
 function MyApp({ Component, pageProps }) {
 
   return (
     <Provider session={pageProps.session}>
       <Component {...pageProps} />
+      <GlobalStyle/>
     </Provider>
   )
 }
