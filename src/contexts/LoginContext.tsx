@@ -28,7 +28,7 @@ export function LoginProvider({ children, }: LoginProviderProps) {
 
   async function geGitHub() {
 
-      axios.get(`http://api.github.com/users/${username}`)
+      axios.get(`https://api.github.com/users/${username}`)
         .then(res => setLogin({
           data: {
             name: res.data.name,
@@ -36,7 +36,6 @@ export function LoginProvider({ children, }: LoginProviderProps) {
           }
         }))
         .catch(err => err.message)
-      console.log(username)
   }
 
 

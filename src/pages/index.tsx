@@ -18,6 +18,7 @@ import {
   Container, BackLogin,
   ContainerLogin
 } from "../styles/pages/Home";
+import { SideBar } from "../components/SideBar";
 interface HomeData {
   level: number;
   currentExperience: number;
@@ -40,7 +41,7 @@ export default function Home(
     >
       <LoginProvider>
         <CountDownProvider>
-          {!session ? <>
+          {!session ? (
             <BackLogin>
               <ContainerLogin>
                 <Head>
@@ -57,12 +58,13 @@ export default function Home(
                 </section>
               </ContainerLogin>
             </BackLogin>
-          </> : <>
+          ) : (
             <Container>
               <Head>
                 <title>Inicio | move.it</title>
               </Head>
               <ExperienceBar />
+              <SideBar/>
               <section>
                 <div>
                   <Profile />
@@ -74,7 +76,7 @@ export default function Home(
                 </div>
               </section>
             </Container>
-          </>}
+          )}
         </CountDownProvider>
       </LoginProvider >
     </ChallengesProvider >

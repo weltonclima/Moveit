@@ -24,43 +24,54 @@ export const Github = styled.div`
     }
 `; 
 
-export const User = styled.div`
-  input {
-    background: linear-gradient(90deg, #4953B8 0%, rgba(73, 83, 184, 0.2) 100%);
-    border-radius: 5px 0px 0px 5px;
-    width: 238px;
-    height: 56px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 34px;
-    border: none;
-    outline: none;
-    color: var(--text-highlight);
-    padding: 0.5rem;
-  }
+interface DivProps {
+  isActive: boolean;
+}
 
-  input::placeholder {
+export const Input = styled.input<DivProps>`
+
+  background: linear-gradient(90deg, #4953B8 0%, rgba(73, 83, 184, 0.2) 100%);
+  border-radius: 5px 0px 0px 5px;
+  width: 238px;
+  height: 56px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 34px;
+  border: ${(props) => props.isActive
+    ? '2px solid #6b75df'
+    : 'none'};
+  outline: none;
+  color: var(--text-highlight);
+  padding: 0.5rem;
+
+  &::placeholder {
     color: var(--text-highlight);
     padding-right: 0.5rem;
   }
+`;
 
-  button {
-    width: 56px;
-    height: 56px;
-    background: #4953B8;
-    border-radius: 0px 5px 5px 0px;
-    border: none;
-    outline: none;
-  }
+interface ButtonProps {
+  isValue: string;
+}
 
-  button:disabled {
+export const Button = styled.button<ButtonProps>`
+
+  width: 56px;
+  height: 56px;
+  background: ${(event) => event.isValue.length > 0
+    ? '#4cd62b'
+    : '#4953B8'};
+  border-radius: 0px 5px 5px 0px;
+  border: none;
+
+  &:disabled {
     opacity: 0.5;
     cursor: default;
   }
 
-  button img {
+  img {
     width: 16.8px;
     height: 16.8px;
   }

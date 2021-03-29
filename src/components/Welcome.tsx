@@ -2,9 +2,7 @@ import { useLoginContext } from '../hooks/useHooks';
 import { Container } from '../styles/components/Welcome';
 export function Welcome() {
   const { login } = useLoginContext()
-  function username() {
 
-  }
   return (
     <Container>
       <div>
