@@ -1,5 +1,4 @@
-import React from "react";
-import styles from "../styles/pages/Home.module.css"
+import React, { useState } from "react";
 import Head from "next/head";
 import { GetServerSideProps } from "next"
 import { ExperienceBar } from "../components/ExperienceBar";
@@ -19,6 +18,7 @@ import {
   ContainerLogin
 } from "../styles/pages/Home";
 import { SideBar } from "../components/SideBar";
+import { LeaderBoard } from "../components/LeaderBoard";
 interface HomeData {
   level: number;
   currentExperience: number;
@@ -30,8 +30,8 @@ export default function Home(
     challengesCompleted,
     currentExperience
   }: HomeData) {
-
-  const [session, loading] = useSession()
+  const [home, setHome] = useState(true);
+  const [session] = useSession()
 
   return (
     <ChallengesProvider
@@ -39,9 +39,9 @@ export default function Home(
       currentExperience={currentExperience}
       challengesCompleted={challengesCompleted}
     >
-      <LoginProvider>
-        <CountDownProvider>
-          {!session ? (
+      <CountDownProvider>
+        {!session ? (
+          <LoginProvider>
             <BackLogin>
               <ContainerLogin>
                 <Head>
@@ -58,13 +58,19 @@ export default function Home(
                 </section>
               </ContainerLogin>
             </BackLogin>
-          ) : (
-            <Container>
+          </LoginProvider >
+        ) : (
+          <Container>
+            
               <Head>
                 <title>Inicio | move.it</title>
               </Head>
+              {home ? <>
               <ExperienceBar />
-              <SideBar/>
+              <SideBar 
+                setHome={setHome} 
+                home={home}              
+              />
               <section>
                 <div>
                   <Profile />
@@ -75,10 +81,16 @@ export default function Home(
                   <ChallengeBox />
                 </div>
               </section>
-            </Container>
-          )}
-        </CountDownProvider>
-      </LoginProvider >
+            </> : <>
+              <SideBar 
+                setHome={setHome} 
+                home={home}
+              />
+              <LeaderBoard />
+            </>}
+          </Container>
+        )}
+      </CountDownProvider>
     </ChallengesProvider >
   )
 }
