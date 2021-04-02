@@ -1,20 +1,34 @@
-import { Container } from "../styles/components/SideBar";
+import { Container, Span } from "../styles/components/SideBar";
 
-export function SideBar() {
+interface SideBarProp {
+  setHome: (event) => void;
+  home: boolean;
+}
+export function SideBar({ setHome, home }: SideBarProp) {
+
   return (
     <Container>
       <img src="LogoSideBar.svg" alt="Logo" />
       <ul>
         <li>
           <div>
-            <span></span>
-            <img src="home.svg" alt="Home" />
+            <Span isActive={home} />
+            <img
+              onClick={e => setHome(true)}
+
+              src={home ? `home.svg` : `homeHide.svg`}
+              alt="Home"
+            />
           </div>
         </li>
         <li>
           <div>
-            <span></span>
-            <img src="award.svg" alt="Ranking" />
+            <Span isActive={!home} />
+            <img
+              onClick={e => setHome(false)}
+              src={!home ? `award.svg` : `awardHide.svg`}
+              alt="Ranking"
+            />
           </div>
         </li>
       </ul>

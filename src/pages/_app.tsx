@@ -3,7 +3,7 @@ import React from 'react';
 import { GlobalStyle } from '../styles/global';
 
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }) {
 
   return (
     <Provider session={pageProps.session}>
@@ -12,5 +12,3 @@ function MyApp({ Component, pageProps }) {
     </Provider>
   )
 }
-
-export default MyApp

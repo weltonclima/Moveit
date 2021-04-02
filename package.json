@@ -28,6 +28,7 @@
     "@types/styled-components": "^5.1.9",
     "@vercel/node": "^1.9.1",
     "babel-plugin-styled-components": "^1.12.0",
-    "typescript": "^4.1.5"
+    "typescript": "^4.1.5",
+    "vercel": "^21.3.3"
   }
 }
