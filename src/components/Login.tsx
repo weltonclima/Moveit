@@ -48,7 +48,7 @@ export function Login() {
         <Button
           isValue={username}
           disabled={!greenButton}
-          onClick={() => signIn()}
+          onClick={() => signIn('github')}
         >
           <img src="Vector.svg" alt="Icone do Botão" />
         </Button>

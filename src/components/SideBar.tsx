@@ -1,3 +1,4 @@
+import { signOut } from "next-auth/client";
 import { Container, Span } from "../styles/components/SideBar";
 
 interface SideBarProp {
@@ -8,7 +9,7 @@ export function SideBar({ setHome, home }: SideBarProp) {
 
   return (
     <Container>
-      <img src="LogoSideBar.svg" alt="Logo" />
+      <img onClick={() => signOut()} src="LogoSideBar.svg" alt="Logo" />
       <ul>
         <li>
           <div>
