@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Head from "next/head";
-import { GetServerSideProps } from "next"
 import { ExperienceBar } from "../components/ExperienceBar";
 import { Profile } from "../components/Profile";
 import { CompletedChallenges } from "../components/CompletedChallenges";
@@ -19,26 +18,13 @@ import {
 } from "../styles/pages/Home";
 import { SideBar } from "../components/SideBar";
 import { LeaderBoard } from "../components/LeaderBoard";
-interface HomeData {
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
-}
 
-export default function Home(
-  { level,
-    challengesCompleted,
-    currentExperience
-  }: HomeData) {
+export default function Home() {
   const [home, setHome] = useState(true);
   const [session] = useSession()
 
   return (
-    <ChallengesProvider
-      level={level}
-      currentExperience={currentExperience}
-      challengesCompleted={challengesCompleted}
-    >
+    <ChallengesProvider>
       <CountDownProvider>
         {!session ? (
           <LoginProvider>
@@ -93,15 +79,4 @@ export default function Home(
       </CountDownProvider>
     </ChallengesProvider >
   )
-}
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const { level, currentExperience, challengesCompleted } = req.cookies;
-
-  return {
-    props: {
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted),
-    }
-  }
 }
