@@ -20,13 +20,13 @@ type User = {
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
-  const img = session.user.image.split('/u/')
-  const filter = img[1].split('?')
-  const id = Number(filter[0])
-
   if (!session) {
     return res.status(401).end('Unauthorized');
   }
+
+  const img = session.user.image.split('/u/')
+  const filter = img[1].split('?')
+  const id = Number(filter[0])  
 
   try {
     const getUser = await fauna.query<User>(

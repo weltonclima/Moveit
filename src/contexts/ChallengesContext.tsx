@@ -59,11 +59,21 @@ export function ChallengesProvider({
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
-  useEffect(() => {
+  /*useEffect(() => {
     Cookies.set('level', String(level));
     Cookies.set('currentExperience', String(currentExperience));
     Cookies.set('challengesCompleted', String(challengesCompleted));
-  }, [level, currentExperience, challengesCompleted])
+  }, [level, currentExperience, challengesCompleted])*/
+  useEffect(() => {
+    async function getUser(){
+      const {data} = await api.get<User>('/users')
+      console.log(data)
+
+    }
+    getUser()
+
+  },[])
+  
 
   useEffect(() => {
     Notification.requestPermission()
