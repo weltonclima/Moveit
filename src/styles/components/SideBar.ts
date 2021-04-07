@@ -45,8 +45,10 @@ interface SpanProps{
 
 export const Span = styled.span<SpanProps>`
   position: absolute;
+  content: "";
   height: 2.45rem;
   width: .20rem;
+  left: 1px;
   border-radius: 0px 5px 5px 0px;
   background: ${(props)=> props.isActive
     ? `#5965e0`

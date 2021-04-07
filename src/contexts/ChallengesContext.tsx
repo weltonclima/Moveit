@@ -2,7 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import challenges from '../../challenges.json';
 import { LevelUpModal } from "../components/LevelUpModal";
 import { api } from "../services/api";
-import { getSession, useSession } from "next-auth/client";
+import { getSession } from "next-auth/client";
 
 interface Challenge {
   type: 'body' | 'eye';
@@ -124,7 +124,7 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
       }
     }
 
-    const { data: user } = await api.put<User>('/users', body)
+    const response = await api.put<User>('/users', body)
 
   }
 

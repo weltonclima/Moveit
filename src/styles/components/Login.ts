@@ -22,34 +22,6 @@ export const Github = styled.div`
       line-height: 1.87rem;
       color: var(--text-highlight);
     }
-`; 
-
-interface DivProps {
-  isActive: boolean;
-}
-
-export const Input = styled.input<DivProps>`
-
-  background: linear-gradient(90deg, #4953B8 0%, rgba(73, 83, 184, 0.2) 100%);
-  border-radius: 5px 0px 0px 5px;
-  width: 238px;
-  height: 56px;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 34px;
-  border: ${(props) => props.isActive
-    ? '2px solid #6b75df'
-    : 'none'};
-  outline: none;
-  color: var(--text-highlight);
-  padding: 0.5rem;
-
-  &::placeholder {
-    color: var(--text-highlight);
-    padding-right: 0.5rem;
-  }
 `;
 
 interface ButtonProps {
@@ -58,21 +30,19 @@ interface ButtonProps {
 
 export const Button = styled.button<ButtonProps>`
 
-  width: 56px;
-  height: 56px;
+  height: 3rem;
+  border-radius: 3rem;
   background: ${(event) => event.isValue.length > 0
     ? '#4cd62b'
     : '#4953B8'};
-  border-radius: 0px 5px 5px 0px;
-  border: none;
+  border: 0;
+  padding: 0 1.5rem;
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: default;
-  }
+  display: flex;
+  align-items: center;
+  justify-content:center;
 
-  img {
-    width: 16.8px;
-    height: 16.8px;
-  }
+  color:var(--white);
+  font-weight: bold;
+
 `;
