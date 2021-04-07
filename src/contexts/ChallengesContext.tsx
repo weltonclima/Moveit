@@ -2,11 +2,27 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import Cookies from 'js-cookie'
 import challenges from '../../challenges.json';
 import { LevelUpModal } from "../components/LevelUpModal";
+import { api } from "../services/api";
+import { useSession } from "next-auth/client";
 
 interface Challenge {
   type: 'body' | 'eye';
   description: string;
   amount: number;
+}
+
+interface User {
+  ref: {
+    id: string;
+  },
+  data: {
+    id: number;
+    name: string;
+    avatar_url: string;
+    level: number;
+    currentExperience: number;
+    challengesCompleted: number;
+  }
 }
 
 interface ChallengesContextData {
@@ -39,6 +55,7 @@ export function ChallengesProvider({
   const [challengesCompleted, setClallengesCompleted] = useState(rest.challengesCompleted ?? 0);
   const [activeChallenge, setActiveChallenge] = useState(null);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
+  const [session] = useSession();
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
@@ -61,7 +78,7 @@ export function ChallengesProvider({
     setIsLevelUpModalOpen(true);
   }
 
-  function closeLevelUpModal(){
+  function closeLevelUpModal() {
     setIsLevelUpModalOpen(false);
   }
 
@@ -83,7 +100,7 @@ export function ChallengesProvider({
     setActiveChallenge(null);
   }
 
-  function completeChallenge() {
+  async function completeChallenge() {
     if (!activeChallenge)
       return;
 
@@ -97,6 +114,17 @@ export function ChallengesProvider({
     setCurrentExperience(finalExperience);
     setActiveChallenge(null);
     setClallengesCompleted(challengesCompleted + 1);
+
+    const body = {
+      data: {
+        level,
+        currentExperience,
+        challengesCompleted
+      }
+    }
+
+    const { data } = await api.put('/users', body)
+
   }
 
   return (

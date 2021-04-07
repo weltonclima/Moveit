@@ -4,4 +4,3 @@ export const fauna = new Client({
 secret: process.env.FAUNADB_KEY,
 
 })
-console.log(fauna)
