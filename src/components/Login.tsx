@@ -1,7 +1,7 @@
 import { signIn } from "next-auth/client";
-import { FaGithub } from 'react-icons/fa';
-import React  from 'react'
-import { Button, Github } from "../styles/components/Login";
+import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
+import React from 'react'
+import { Github, Div } from "../styles/components/Login";
 
 export function Login() {
 
@@ -14,15 +14,22 @@ export function Login() {
         />
         <small>Faça login com seu Github <br /> para começar</small>
       </Github>
-      <div>
-        <Button
-          isValue={true}
+      <Div>
+        <button
           onClick={() => signIn('github')}
         >
           <FaGithub color="#dcdde0" />
-          GitHub
-        </Button>
-      </div>
+        </button>
+        <button>
+          <FaLinkedin color="#dcdde0" />
+        </button>
+        <button>
+          <FaFacebook color="#dcdde0" />
+        </button>
+        <button>
+          <FaInstagram color="#dcdde0" />
+        </button>
+      </Div>
     </>
   )
 }
