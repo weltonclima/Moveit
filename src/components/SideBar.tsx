@@ -1,11 +1,21 @@
 import { signOut } from "next-auth/client";
-import { Container, Span } from "../styles/components/SideBar";
+import { useState } from "react";
+import { FaGithub } from 'react-icons/fa';
+import { FiX } from 'react-icons/fi';
+import { Button, Container, Span } from "../styles/components/SideBar";
 
 interface SideBarProp {
   setHome: (event) => void;
   home: boolean;
 }
 export function SideBar({ setHome, home }: SideBarProp) {
+  const [focus, setFocus] = useState(false);
+
+  function handleSignOut() {
+    setTimeout(() => {
+      setFocus(false);
+    }, 1000);
+  }
 
   return (
     <Container>
@@ -33,6 +43,18 @@ export function SideBar({ setHome, home }: SideBarProp) {
           </div>
         </li>
       </ul>
+      <Button
+        type="button"
+        onMouseOver={e => setFocus(true)}
+        onMouseOut={e => handleSignOut()}
+        onClick={() => signOut()}
+      >
+        {focus ? <>
+          <FiX color="#FFF" />
+        </> : <>
+          <FaGithub color="#FFF" />
+        </>}
+      </Button>
     </Container>
   );
 }

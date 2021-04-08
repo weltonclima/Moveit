@@ -1,34 +1,64 @@
 import { signIn } from "next-auth/client";
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
-import React from 'react'
-import { Github, Div } from "../styles/components/Login";
+import React, { useState } from 'react'
+import { Github, Div, Button, Welcome } from "../styles/components/Login";
 
 export function Login() {
+  const [focus, setFocus] = useState(false);
 
   return (
     <>
+      <Welcome>
+        <div>
+          <img src="Logo.svg" alt="Logo move.it" />
+        </div>
+        <strong>Bem-vindo</strong>
+      </Welcome>
       <Github>
-        <img
-          src="Github.svg"
-          alt="Imagem Github" id="img-github"
-        />
-        <small>Faça login com seu Github <br /> para começar</small>
+        <small>Faça login para começar</small>
       </Github>
       <Div>
-        <button
+        <Button
+          type="button"
+          onMouseOver={e => setFocus(true)}
+          onMouseOut={e => setFocus(false)}
+          isActive={focus}
+          isRadius={25}
+          isBorder={false}
           onClick={() => signIn('github')}
         >
-          <FaGithub color="#dcdde0" />
-        </button>
-        <button>
-          <FaLinkedin color="#dcdde0" />
-        </button>
-        <button>
-          <FaFacebook color="#dcdde0" />
-        </button>
-        <button>
-          <FaInstagram color="#dcdde0" />
-        </button>
+          <FaGithub />
+        </Button>
+        <Button
+          type="button"
+          onMouseOver={e => setFocus(true)}
+          onMouseOut={e => setFocus(false)}
+          isActive={focus}
+          isRadius={5}
+          isBorder={true}
+        >
+          <FaLinkedin />
+        </Button>
+        <Button
+          type="button"
+          onMouseOver={e => setFocus(true)}
+          onMouseOut={e => setFocus(false)}
+          isActive={focus}
+          isRadius={25}
+          isBorder={false}
+        >
+          <FaFacebook />
+        </Button>
+        <Button
+          type="button"
+          onMouseOver={e => setFocus(true)}
+          onMouseOut={e => setFocus(false)}
+          isActive={focus}
+          isRadius={15}
+          isBorder={true}
+        >
+          <FaInstagram />
+        </Button>
       </Div>
     </>
   )

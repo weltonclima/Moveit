@@ -1,5 +1,25 @@
 import styled from "styled-components";
 
+export const Welcome = styled.div`
+
+  img {
+  width: 15.75rem;
+  height: 3.32rem;
+  margin-bottom: 3.2rem;
+  }
+
+  strong {
+  width: 8.35rem;
+  height: 2.01rem;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.57rem;
+  line-height: 2.01rem;
+  color: var(--white);
+}
+`;
+
 export const Github = styled.div`
   
   display: flex;
@@ -8,18 +28,11 @@ export const Github = styled.div`
   margin-top: 1.48rem;
   margin-bottom: 2.18rem;
 
-  img {
-    width: 50px;
-    height: 50px;
-    margin-right: 1.05rem;
-    border-radius: 50%;
-  }
-
   small {
     font-family: Inter;
     font-style: normal;
     font-weight: 500;
-    font-size: 1.25rem;
+    font-size: 1.40rem;
     line-height: 1.87rem;
     color: var(--text-highlight);
   }
@@ -29,34 +42,51 @@ export const Div = styled.div`
   display: flex;
   align-items:center;
   justify-content: left;
+`;
 
-  button {
-    height: 3rem;
+interface ButtonProps {
+  isActive: boolean;
+  isRadius: number;
+  isBorder: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
+  height: 3rem;
+  width: 3rem;
+
+  border-radius:${(props) => props.isRadius > 0
+    && `${props.isRadius}px`};
+  
+  background: var(--blue-dark);
+  color:var(--white);
+  border: ${(props) => props.isBorder
+    ? `1px solid var(--white)`
+    : `2px solid var(--blue-dark)`};
+
+  display: flex;
+  align-items: center;
+  justify-content:center;
+
+  svg{
     width: 3rem;
-    border-radius: 25px;
-    background: var(--blue-dark);
-    border: 0;
+    height: 3rem;
+  }
 
-    display: flex;
-    align-items: center;
-    justify-content:center;
+  transition: background 0.2s;
 
-    color:var(--white);
-    font-weight: bold;
+  &:hover{
+  background:${(props) => props.isActive
+    && `var(--white)`};
 
-    svg{
-      width: 25px;
-      height: 25px;
-    }
+  color:${(props) => props.isActive
+    && `var(--blue-dark)`};
 
-    transition: background 0.2s;
+  border: ${(props) => props.isBorder
+    ? `2px solid var(--blue-dark)`
+    : `1px solid var(--white)`};
+  }
 
-    &:hover{
-      background: var(--green);
-    }
-
-    &+button{
-      margin-left: 0.5rem;
-    }
+  &+button{
+    margin-left: 0.5rem;
   }
 `;

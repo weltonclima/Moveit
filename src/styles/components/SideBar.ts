@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-
-
 export const Container = styled.div`
   position: fixed;
   width: 4.9rem;
@@ -37,9 +35,34 @@ export const Container = styled.div`
       } 
     }
   }
+  `;
+
+interface ButtonProps{
+  isActive: boolean;
+}
+
+export const Button = styled.button`
+  position: absolute;
+  margin:  .9rem;
+  bottom: 0px;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 25px;
+  background: var(--blue);
+  
+  border: 1px solid var(--blue);
+
+  display: flex;
+  align-items: center;
+  justify-content:center;
+
+  svg{
+    width: 3rem;
+    height: 3rem;
+  }
 `;
 
-interface SpanProps{
+interface SpanProps {
   isActive: boolean;
 }
 
@@ -50,7 +73,7 @@ export const Span = styled.span<SpanProps>`
   width: .20rem;
   left: 1px;
   border-radius: 0px 5px 5px 0px;
-  background: ${(props)=> props.isActive
+  background: ${(props) => props.isActive
     ? `#5965e0`
     : `none`};
 `;

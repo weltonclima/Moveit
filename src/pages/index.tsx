@@ -9,7 +9,6 @@ import { CountDownProvider } from "../contexts/CountDownContext";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
 import { Login } from "../components/Login";
 import { Logo } from "../components/Logo";
-import { Welcome } from "../components/Welcome";
 import { useSession } from "next-auth/client";
 import {
   Container, BackLogin,
@@ -36,7 +35,6 @@ export default function Home() {
                     <Logo />
                   </div>
                   <div>
-                    <Welcome />
                     <Login />
                   </div>
                 </section>
