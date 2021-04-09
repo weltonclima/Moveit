@@ -1,5 +1,5 @@
-import { useChallengesContext } from '../hooks/useHooks';
-import { Container } from '../styles/components/CompletedChallenges';
+import { useChallengesContext } from '../../hooks/useHooks';
+import { Container } from './styles';
 export function CompletedChallenges() {
   const { challengesCompleted } = useChallengesContext()
   return (

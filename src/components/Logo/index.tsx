@@ -1,4 +1,4 @@
-import { Container } from '../styles/components/Logo'
+import { Container } from './styles'
 export function Logo() {
   
   return (

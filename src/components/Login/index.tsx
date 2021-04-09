@@ -1,7 +1,7 @@
 import { signIn } from "next-auth/client";
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
 import React, { useState } from 'react'
-import { Github, Div, Button, Welcome } from "../styles/components/Login";
+import { Github, Div, Button, Welcome } from "./styles";
 
 export function Login() {
   const [focus, setFocus] = useState(false);

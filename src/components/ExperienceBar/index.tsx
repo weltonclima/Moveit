@@ -1,5 +1,5 @@
-import { useChallengesContext } from '../hooks/useHooks';
-import { Container, Div, Span } from '../styles/components/ExperienceBar';
+import { useChallengesContext } from '../../hooks/useHooks';
+import { Container, Div, Span } from './styles';
 
 export function ExperienceBar() {
   const { currentExperience, experienceToNextLevel } = useChallengesContext()

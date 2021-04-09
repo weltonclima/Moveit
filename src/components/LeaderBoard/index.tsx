@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { api } from "../services/api";
-import { Container, User } from "../styles/components/LeaderBoard";
+import { api } from "../../services/api";
+import { Container, User } from "./styles";
 
 interface User {
   ref: {

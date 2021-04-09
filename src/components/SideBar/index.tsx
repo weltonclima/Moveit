@@ -2,7 +2,7 @@ import { signOut } from "next-auth/client";
 import { useState } from "react";
 import { FaGithub } from 'react-icons/fa';
 import { FiX } from 'react-icons/fi';
-import { Button, Container, Span } from "../styles/components/SideBar";
+import { Button, Container, Span } from './styles';
 
 interface SideBarProp {
   setHome: (event) => void;
@@ -19,7 +19,7 @@ export function SideBar({ setHome, home }: SideBarProp) {
 
   return (
     <Container>
-      <img onClick={() => signOut()} src="LogoSideBar.svg" alt="Logo" />
+      <img src="LogoSideBar.svg" alt="Logo" />
       <ul>
         <li>
           <div>

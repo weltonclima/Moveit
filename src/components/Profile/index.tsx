@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/client';
-import { useChallengesContext } from '../hooks/useHooks';
-import { Container } from '../styles/components/Profile.';
+import { useChallengesContext } from '../../hooks/useHooks';
+import { Container } from './styles';
 
 
 export function Profile() {

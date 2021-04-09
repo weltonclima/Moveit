@@ -1,5 +1,5 @@
-import { useChallengesContext } from '../hooks/useHooks';
-import { Container, Overlay } from '../styles/components/LevelUpModal';
+import { useChallengesContext } from '../../hooks/useHooks';
+import { Container, Overlay } from './styles';
 
 export function LevelUpModal() {
   const { level, closeLevelUpModal } = useChallengesContext();

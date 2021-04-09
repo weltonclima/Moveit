@@ -1,5 +1,7 @@
-import { useChallengesContext, useCountDownContext } from '../hooks/useHooks';
-import { ChallengeActive, ChallengeButton, ChallengeNotActive, Container } from '../styles/components/ChallengeBox';
+import { useChallengesContext, useCountDownContext } from '../../hooks/useHooks';
+import { 
+  ChallengeActive, ChallengeButton, 
+  ChallengeNotActive, Container } from './styles';
 export function ChallengeBox() {
   const { activeChallenge, resetChallenge, completeChallenge } = useChallengesContext();
   const { resetCountdown } = useCountDownContext();
