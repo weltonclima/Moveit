@@ -27,7 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const getUser = await fauna.query<User>(
       q.Map(
-        q.Paginate(q.Match(q.Index("order_by"))),
+        q.Paginate(q.Match(q.Index("sort_by_desc"))),
         Lambda(
           [
             "level", 
