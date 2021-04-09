@@ -68,6 +68,9 @@ export default function Home({ session }: HomeProps) {
                 </div>
               </section>
             </> : <>
+              <Head>
+                <title>LeaderBoard | move.it</title>
+              </Head>
               <SideBar
                 setHome={setHome}
                 home={home}
