@@ -13,7 +13,7 @@ import { getSession } from "next-auth/client";
 import {
   Container, BackLogin,
   ContainerLogin
-} from "./Home";
+} from "../styles/Home";
 import { SideBar } from "../components/SideBar/index";
 import { LeaderBoard } from "../components/LeaderBoard/index";
 import { GetServerSideProps } from "next";
