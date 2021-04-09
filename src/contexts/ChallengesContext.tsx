@@ -49,7 +49,6 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
   const [activeChallenge, setActiveChallenge] = useState(null);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
-
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
   useEffect(() => {
@@ -58,7 +57,7 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
       if (!session) {
         return
       }
-      const { data: user } = await api.get<User>('/users');
+      const { data: user } = await api.get<User>('/user');
       setLevel(user.data.level);
       setCurrentExperience(user.data.currentExperience);
       setClallengesCompleted(user.data.challengesCompleted);
@@ -96,11 +95,11 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     if (!activeChallenge)
       return;
 
-    const session = await getSession();
-    if (!session) {
-      return
-    }
-
+      const session = await getSession();
+      if (!session) {
+        return
+      }
+      
     const { amount } = activeChallenge;
     let finalExperience = currentExperience + amount;
     let finallevel = level;
@@ -124,26 +123,26 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
       }
     }
 
-    const response = await api.put<User>('/users', body)
+    const response = await api.put<User>('/user', body)
 
   }
 
-return (
-  <ChallengesContext.Provider
-    value={{
-      level,
-      currentExperience,
-      challengesCompleted,
-      activeChallenge,
-      experienceToNextLevel,
-      startNewChallenge,
-      resetChallenge,
-      completeChallenge,
-      closeLevelUpModal,
-    }}
-  >
-    {children}
-    {isLevelUpModalOpen && <LevelUpModal />}
-  </ChallengesContext.Provider>
-);
+  return (
+    <ChallengesContext.Provider
+      value={{
+        level,
+        currentExperience,
+        challengesCompleted,
+        activeChallenge,
+        experienceToNextLevel,
+        startNewChallenge,
+        resetChallenge,
+        completeChallenge,
+        closeLevelUpModal,
+      }}
+    >
+      {children}
+      {isLevelUpModalOpen && <LevelUpModal />}
+    </ChallengesContext.Provider>
+  );
 }

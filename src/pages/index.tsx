@@ -9,48 +9,53 @@ import { CountDownProvider } from "../contexts/CountDownContext";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
 import { Login } from "../components/Login";
 import { Logo } from "../components/Logo";
-import { useSession } from "next-auth/client";
+import { getSession } from "next-auth/client";
 import {
   Container, BackLogin,
   ContainerLogin
 } from "../styles/pages/Home";
 import { SideBar } from "../components/SideBar";
 import { LeaderBoard } from "../components/LeaderBoard";
+import { GetServerSideProps } from "next";
+import { Session } from "next-auth";
 
-export default function Home() {
+interface HomeProps {
+  session: Session
+}
+
+export default function Home({ session }: HomeProps) {
   const [home, setHome] = useState(true);
-  const [session] = useSession()
 
   return (
     <ChallengesProvider>
       <CountDownProvider>
         {!session ? (
-            <BackLogin>
-              <ContainerLogin>
-                <Head>
-                  <title>Login | move.it</title>
-                </Head>
-                <section>
-                  <div>
-                    <Logo />
-                  </div>
-                  <div>
-                    <Login />
-                  </div>
-                </section>
-              </ContainerLogin>
-            </BackLogin>
+          <BackLogin>
+            <ContainerLogin>
+              <Head>
+                <title>Login | move.it</title>
+              </Head>
+              <section>
+                <div>
+                  <Logo />
+                </div>
+                <div>
+                  <Login />
+                </div>
+              </section>
+            </ContainerLogin>
+          </BackLogin>
         ) : (
           <Container>
-            
-              <Head>
-                <title>Inicio | move.it</title>
-              </Head>
-              {home ? <>
+
+            <Head>
+              <title>Inicio | move.it</title>
+            </Head>
+            {home ? <>
               <ExperienceBar />
-              <SideBar 
-                setHome={setHome} 
-                home={home}              
+              <SideBar
+                setHome={setHome}
+                home={home}
               />
               <section>
                 <div>
@@ -63,8 +68,8 @@ export default function Home() {
                 </div>
               </section>
             </> : <>
-              <SideBar 
-                setHome={setHome} 
+              <SideBar
+                setHome={setHome}
                 home={home}
               />
               <LeaderBoard />
@@ -74,4 +79,13 @@ export default function Home() {
       </CountDownProvider>
     </ChallengesProvider >
   )
+}
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+
+  return {
+    props: {
+      session,
+    }
+  }
 }
