@@ -1,12 +1,14 @@
 import NextAuth from 'next-auth';
-import { query as q } from 'faunadb';
+import { Login, query as q } from 'faunadb';
 import Providers from 'next-auth/providers';
 import { fauna } from '../../../services/fauna';
 
 type Profile = {
   id: number;
-  avatar_url: string;
   name: string;
+  login: string;
+  email: string;
+  avatar_url: string;
 }
 
 type Data = {
@@ -16,6 +18,8 @@ type Data = {
   data: {
     id: number;
     name: string;
+    login: string;
+    email: string;
     avatar_url: string;
     level: number;
     currentExperience: number;
@@ -31,11 +35,19 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_SECRET,
       scope: 'read:user'
     }),
+    /*Providers.LinkedIn({
+      clientId: process.env.LINKEDIN_CLIENT_ID,
+      clientSecret: process.env.LINKEDIN_CLIENT_SECRET
+    }),
+    Providers.Facebook({
+      clientId: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+    })*/
   ],
   callbacks: {
     async signIn(user, account, profile: Profile) {
-      const { id, avatar_url, name } = profile;
-
+      const { id, avatar_url, name, email, login } = profile;
+      
       try {
 
         await fauna.query<Data>(
@@ -48,18 +60,25 @@ export default NextAuth({
                 )
               )
             ),
-            q.Create(
-              q.Collection('users'),
-              {
-                data: {
-                  id, 
-                  name, 
-                  avatar_url,
-                  level: 1,
-                  currentExperience: 0,
-                  challengesCompleted: 0
-                }
-              }
+            q.Map(
+              [
+                [id,
+                  {
+                    "id": id,
+                    "name": name,
+                    "login": login,
+                    "email": email,
+                    "avatar_url": avatar_url,
+                    "level": 1,
+                    "currentExperience": 0,
+                    "challengesCompleted": 0
+                  }
+                ]
+              ],
+              q.Lambda(
+                ["dID", "data"],
+                q.Create(q.Ref(q.Collection("users"), q.Var("dID")), { data: q.Var("data") })
+              )
             ),
             q.Get(
               q.Match(
@@ -69,7 +88,7 @@ export default NextAuth({
             )
           )
         )
-
+        
         return true;
       } catch {
         return false;

@@ -10,6 +10,8 @@ type User = {
   data: {
     id: number;
     name: string;
+    login: string;
+    email: string;
     avatar_url: string;
     level: number;
     currentExperience: number;
@@ -26,7 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const img = session.user.image.split('/u/')
   const filter = img[1].split('?')
-  const id = Number(filter[0])  
+  const id = Number(filter[0])
 
   try {
     const getUser = await fauna.query<User>(
