@@ -50,5 +50,6 @@ button {
 a {
   color: inherit;
   text-decoration: none;
+  outline: none;
 }
 `;

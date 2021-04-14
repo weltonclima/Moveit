@@ -1,47 +1,59 @@
 import styled from "styled-components";
 
-export const Welcome = styled.div`
+export const Container = styled.div`
+  div{
+    img {
+      width: 15.75rem;
+      height: 3.32rem;
+      margin-bottom: 3.2rem;
+      }
 
-  img {
-  width: 15.75rem;
-  height: 3.32rem;
-  margin-bottom: 3.2rem;
+      strong {
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 1.57rem;
+      line-height: 2.01rem;
+      color: var(--white);
+    }
   }
 
-  strong {
-  width: 8.35rem;
-  height: 2.01rem;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 1.57rem;
-  line-height: 2.01rem;
-  color: var(--white);
-}
-`;
-
-export const Github = styled.div`
-  
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  margin-top: 1.48rem;
-  margin-bottom: 2.18rem;
-
-  small {
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.40rem;
-    line-height: 1.87rem;
-    color: var(--text-highlight);
+  div{
+    small {
+      display:inline-block;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 1.40rem;
+      line-height: 1.87rem;
+      color: var(--text-highlight);
+      margin-top: 1.48rem;
+      margin-bottom: 2.18rem;
+    }
   }
-`;
 
-export const Div = styled.div`
-  display: flex;
-  align-items:center;
-  justify-content: left;
+  div:last-child{
+    display: flex;
+    align-items:center;
+    justify-content: left;
+  }
+
+  @media (max-width: 980px){
+    div{
+      strong{
+        justify-content: center;
+        display: flex;
+      }
+    }
+    div{
+      small{
+        text-align: center;
+      }
+    }
+    div:last-child{
+      justify-content: center;
+    }
+  }
 `;
 
 interface ButtonProps {

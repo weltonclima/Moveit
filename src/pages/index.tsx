@@ -75,7 +75,9 @@ export default function Home({ session }: HomeProps) {
                 setHome={setHome}
                 home={home}
               />
-              <LeaderBoard />
+              <LeaderBoard 
+                home={home}
+              />
             </>}
           </Container>
         )}

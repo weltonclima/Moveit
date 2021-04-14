@@ -1,8 +1,8 @@
 import { signOut } from "next-auth/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaGithub } from 'react-icons/fa';
 import { FiX } from 'react-icons/fi';
-import { Button, Container, Span } from './styles';
+import { Container, Span } from './styles';
 
 interface SideBarProp {
   setHome: (event) => void;
@@ -10,6 +10,16 @@ interface SideBarProp {
 }
 export function SideBar({ setHome, home }: SideBarProp) {
   const [focus, setFocus] = useState(false);
+  const [openSideBar, setOpenSideBar] = useState(false);
+
+  useEffect(() => {
+
+    setTimeout(() => {
+      openSideBar && setOpenSideBar(false);
+
+    }, 5000)
+
+  }, [openSideBar])
 
   function handleSignOut() {
     setTimeout(() => {
@@ -18,8 +28,14 @@ export function SideBar({ setHome, home }: SideBarProp) {
   }
 
   return (
-    <Container>
-      <img src="LogoSideBar.svg" alt="Logo" />
+    <Container
+      isActive={openSideBar}
+    >
+      <img
+        onClick={e => {!openSideBar && setOpenSideBar(true)}}
+        src="LogoSideBar.svg"
+        alt="Logo"
+      />
       <ul>
         <li>
           <div>
@@ -43,7 +59,7 @@ export function SideBar({ setHome, home }: SideBarProp) {
           </div>
         </li>
       </ul>
-      <Button
+      <button
         type="button"
         onMouseOver={e => setFocus(true)}
         onMouseOut={e => handleSignOut()}
@@ -54,7 +70,7 @@ export function SideBar({ setHome, home }: SideBarProp) {
         </> : <>
           <FaGithub color="#FFF" />
         </>}
-      </Button>
+      </button>
     </Container>
   );
 }

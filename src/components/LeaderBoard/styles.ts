@@ -10,7 +10,7 @@ export const Container = styled.div`
     font-size: 1.57rem;
     line-height: 2.01rem;
     color: var(--title);
-    margin-bottom: 1.75rem;
+    margin: 1.75rem 0;
   }
 
   table{

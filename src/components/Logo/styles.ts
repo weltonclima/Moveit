@@ -11,4 +11,15 @@ export const Container = styled.div`
   img:hover {
     opacity: 1;
   }
+
+  @media (max-width:980px){
+    width: 0;
+    height: 0;
+    img{
+      margin-top: 3.5rem;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+  }
 `;

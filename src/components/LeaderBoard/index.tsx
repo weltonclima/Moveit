@@ -16,8 +16,18 @@ interface User {
   }
 }
 
-export function LeaderBoard() {
+interface LoaderBoardProps {
+  home: boolean;
+}
+
+export function LeaderBoard({ home }: LoaderBoardProps) {
   const [users, setUsers] = useState<User[]>([]);
+  const [screenWidth, setScreenWidth] = useState(screen.width);
+
+  const interval = setInterval(() => {
+    screenWidth != screen.width && setScreenWidth(screen.width)
+    home && clearInterval(interval)
+  }, 1000)
 
   useEffect(() => {
     async function getUser() {
@@ -36,8 +46,12 @@ export function LeaderBoard() {
           <tr>
             <th>POSIÇÃO</th>
             <th>USUÁRIO</th>
-            <th>DESAFIOS</th>
-            <th>EXPERIÊNCIA</th>
+            {screenWidth > 430 &&
+              <>
+                <th>DESAFIOS</th>
+                <th>EXPERIÊNCIA</th>
+              </>
+            }
           </tr>
         </thead>
         <tbody>
@@ -56,12 +70,16 @@ export function LeaderBoard() {
                   </div>
                 </User>
               </td>
-              <td>
-                <span>{user.data.challengesCompleted}</span> completados
-              </td>
-              <td>
-                <span>{user.data.currentExperience}</span> xp
-              </td>
+              { screenWidth > 430 &&
+                <>
+                  <td>
+                    <span>{user.data.challengesCompleted}</span> completados
+                  </td>
+                  <td>
+                    <span>{user.data.currentExperience}</span> xp
+                  </td>
+                </>
+              }
             </tr>
           ))}
         </tbody>

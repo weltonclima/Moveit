@@ -20,19 +20,19 @@ export const ChallengeNotActive = styled.div`
   align-items: center;
 
   strong {
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.4;
-  margin-bottom: 10rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 10rem;
   }
 
   p {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  line-height: 1.4;
-  max-width: 70%;
-  margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.4;
+    max-width: 70%;
+    margin-top: 3rem;
 
     img {
     margin-bottom: 1rem;
@@ -69,6 +69,8 @@ export const ChallengeActive = styled.div`
 
     p {
       line-height: 1.5;
+      max-width: 70%;
+      margin-bottom: 1rem;
     }
   }
 
@@ -97,7 +99,6 @@ export const ChallengeActive = styled.div`
 `;
 
 interface ChallengeButtonProps {
-  isActive: boolean;
   activeColor: 'green' | 'red';
 }
 
@@ -107,18 +108,6 @@ const color = {
 }
 
 export const ChallengeButton = styled.button<ChallengeButtonProps>`
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: 5px;
-  color: var(--white);
-  font-size: 1rem;
-  font-weight: 600;
-  transition: filter 0.2s;
-  background:${(props)=> props.isActive
-    ? transparentize(0.1,color[props.activeColor])
-    : color[props.activeColor]
-  }
+
+  background:${(props) => transparentize(0.1, color[props.activeColor])}
 `;

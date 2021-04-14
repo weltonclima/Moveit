@@ -1,5 +1,5 @@
 import { useChallengesContext } from '../../hooks/useHooks';
-import { Container, Div, Span } from './styles';
+import { Container, Span } from './styles';
 
 export function ExperienceBar() {
   const { currentExperience, experienceToNextLevel } = useChallengesContext()
@@ -9,12 +9,12 @@ export function ExperienceBar() {
   return (
     <Container>
       <span>0 xp</span>
-      <Div>
+      <div>
         <div style={{ width: `${percentToNextLevel}%` }} />
         <Span style={{ left: `${percentToNextLevel}%` }} >
           {currentExperience} xp
         </Span>
-      </Div>
+      </div>
       <span>{experienceToNextLevel} xp</span>
     </Container>
   );

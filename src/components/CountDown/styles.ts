@@ -44,30 +44,35 @@ interface CountDownButtonProps {
 export const CountDownButton = styled.button<CountDownButtonProps>`
   width: 100%;
   height: 5rem;
-  margin-top: 2rem;
+  margin: 2rem 0 1rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 0;
   border-radius: 5px;
-  color:${(props) => props.isActive
-    ? 'var(--title)'
-    : 'var(--white)'};
   font-size: 1.25rem;
   font-weight: 600;
   transition: background-color 0.2s;
-  background: ${(props) => props.isActive
-    ? 'var(--white)'
-    : 'var(--blue)'};
 
-  &:not(:disabled):hover{
-    background: var(--blue-dark);
-    background: ${(props) => props.isActive 
-    ? 'var(--red)' 
-    : 'var(--blue-dark)'};
-    color:${(props) => props.isActive 
-    ? 'var(--white)' 
-    : 'var(--white)'};
+  ${(props)=> props.isActive
+    ? `
+      color: var(--title);
+      background: var(--white);
+
+      &:not(:disabled):hover{
+        background: var(--red);
+        color: var(--white)
+      }
+    `
+    : `
+      color: var(--white);
+      background: var(--blue);
+
+      &:not(:disabled):hover{
+        background: var(--blue-dark);
+
+      }
+    `
   }
 
   &:disabled {

@@ -1,23 +1,23 @@
 import { signIn } from "next-auth/client";
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
 import React, { useState } from 'react'
-import { Github, Div, Button, Welcome } from "./styles";
+import { Button, Container } from "./styles";
 
 export function Login() {
   const [focus, setFocus] = useState(false);
 
   return (
-    <>
-      <Welcome>
+    <Container>
+      <div>
         <div>
           <img src="Logo.svg" alt="Logo move.it" />
         </div>
         <strong>Bem-vindo</strong>
-      </Welcome>
-      <Github>
+      </div>
+      <div>
         <small>Faça login para começar</small>
-      </Github>
-      <Div>
+      </div>
+      <div>
         <Button
           type="button"
           onMouseOver={e => setFocus(true)}
@@ -59,7 +59,7 @@ export function Login() {
         >
           <FaInstagram />
         </Button>
-      </Div>
-    </>
+      </div>
+    </Container>
   )
 }

@@ -3,24 +3,24 @@ import styled from "styled-components";
 export const Container = styled.header`
   display: flex;
   align-items: center;
-
+  padding: 1rem 0;
   span {
     font-size: 1rem;
   }
-`;
 
-export const Div = styled.div`
-  flex: 1;
-  height: 4px;
-  border-radius: 4px;
-  background: var(--gray-line);
-  margin: 0 1.5rem;
-  position: relative;
-
-  div {
+  >div{
+    flex: 1;
     height: 4px;
     border-radius: 4px;
-    background: var(--green);
+    background: var(--gray-line);
+    margin: 0 1.5rem;
+    position: relative;
+
+    div {
+      height: 4px;
+      border-radius: 4px;
+      background: var(--green);
+    }
   }
 `;
 
