@@ -30,14 +30,12 @@ export function ChallengeBox() {
           <footer>
             <ChallengeButton
               type="button"
-              isActive={true}
               activeColor="red"
               onClick={handleChallengeFailed}
             >
               Falhei
             </ChallengeButton>
             <ChallengeButton
-              isActive={true}
               activeColor="green"
               type="button"
               onClick={handleChallengeSucceeded}
