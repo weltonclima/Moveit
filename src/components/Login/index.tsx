@@ -1,5 +1,5 @@
 import { signIn } from "next-auth/client";
-import { FaGithub, FaLinkedin, FaFacebook, FaInstagram, FaGoogle } from 'react-icons/fa';
+import { FaGithub, FaGoogle } from 'react-icons/fa';
 import React, { useState } from 'react'
 import { Button, Container } from "./styles";
 

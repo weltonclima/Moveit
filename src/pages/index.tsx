@@ -9,7 +9,6 @@ import { CountDownProvider } from "../contexts/CountDownContext";
 import { ChallengesProvider } from "../contexts/ChallengesContext";
 import { Login } from "../components/Login/index";
 import { Logo } from "../components/Logo/index";
-import { Base64 } from 'js-base64';
 import { getSession } from "next-auth/client";
 import {
   Container, BackLogin,

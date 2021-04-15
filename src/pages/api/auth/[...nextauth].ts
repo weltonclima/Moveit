@@ -1,8 +1,7 @@
 import NextAuth from 'next-auth';
-import { If, query as q } from 'faunadb';
+import { query as q } from 'faunadb';
 import Providers from 'next-auth/providers';
 import { fauna } from '../../../services/fauna';
-import { toast } from 'react-toastify';
 
 
 type Profile = {
