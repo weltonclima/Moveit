@@ -1,5 +1,5 @@
 import { signIn } from "next-auth/client";
-import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaFacebook, FaInstagram, FaGoogle } from 'react-icons/fa';
 import React, { useState } from 'react'
 import { Button, Container } from "./styles";
 
@@ -34,30 +34,11 @@ export function Login() {
           onMouseOver={e => setFocus(true)}
           onMouseOut={e => setFocus(false)}
           isActive={focus}
-          isRadius={5}
-          isBorder={true}
-        >
-          <FaLinkedin />
-        </Button>
-        <Button
-          type="button"
-          onMouseOver={e => setFocus(true)}
-          onMouseOut={e => setFocus(false)}
-          isActive={focus}
           isRadius={25}
           isBorder={false}
+          onClick={() => signIn('google')}
         >
-          <FaFacebook />
-        </Button>
-        <Button
-          type="button"
-          onMouseOver={e => setFocus(true)}
-          onMouseOut={e => setFocus(false)}
-          isActive={focus}
-          isRadius={15}
-          isBorder={true}
-        >
-          <FaInstagram />
+          <FaGoogle />
         </Button>
       </div>
     </Container>

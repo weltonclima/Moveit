@@ -1,7 +1,8 @@
-import { signOut } from "next-auth/client";
+import {  getSession, signOut } from "next-auth/client";
 import { useEffect, useState } from "react";
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { FiX } from 'react-icons/fi';
+import { api } from "../../services/api";
 import { Container, Span } from './styles';
 
 interface SideBarProp {
@@ -11,6 +12,21 @@ interface SideBarProp {
 export function SideBar({ setHome, home }: SideBarProp) {
   const [focus, setFocus] = useState(false);
   const [openSideBar, setOpenSideBar] = useState(false);
+  const [provider, setProvider] = useState('');
+
+  useEffect(() => {
+    async function getUser() {
+      const session = await getSession();
+      if (!session) {
+        return
+      }
+      const res = await api.get('/user');
+      console.log(res.data)
+      setProvider(res.data.provider)
+
+    }
+    getUser()
+  }, [])
 
   useEffect(() => {
 
@@ -32,7 +48,7 @@ export function SideBar({ setHome, home }: SideBarProp) {
       isActive={openSideBar}
     >
       <img
-        onClick={e => {!openSideBar && setOpenSideBar(true)}}
+        onClick={e => { !openSideBar && setOpenSideBar(true) }}
         src="LogoSideBar.svg"
         alt="Logo"
       />
@@ -68,7 +84,8 @@ export function SideBar({ setHome, home }: SideBarProp) {
         {focus ? <>
           <FiX color="#FFF" />
         </> : <>
-          <FaGithub color="#FFF" />
+          {provider == 'google' && <FaGoogle color="#FFF" />}
+          {provider == 'github' && <FaGithub color="#FFF" />}
         </>}
       </button>
     </Container>

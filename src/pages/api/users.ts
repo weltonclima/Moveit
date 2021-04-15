@@ -40,7 +40,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             ], q.Get(q.Var("Ref")))
         )
       );
-            console.log(getUser.data)
+            
       if (!getUser) {
         return res.status(404).end('NotFound');
       }

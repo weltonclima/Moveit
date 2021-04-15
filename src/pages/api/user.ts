@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import { fauna } from "../../services/fauna";
-import { query as q } from 'faunadb'
+import { Base64 } from 'js-base64';
+import { query as q } from 'faunadb';
 
 type User = {
   ref: {
@@ -21,39 +22,40 @@ type User = {
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
+  const getCookies = JSON.stringify(req.cookies).split(',')
+  const cookies = getCookies[2].split(':')
+
+  const getUser = Base64.decode(cookies[1]).split('","')
+  const email = getUser[1].split('":"')
+  const id = getUser[3].split('":"')
 
   if (!session) {
     return res.status(401).end('Unauthorized');
   }
-
-  const img = session.user.image.split('/u/')
-  const filter = img[1].split('?')
-  const id = Number(filter[0])
-
+  
   try {
     const getUser = await fauna.query<User>(
-      q.Get(
-        q.Match(
-          q.Index('user_by_id'),
-          q.Casefold(id)
-        )
-      )
+      q.If(
+        q.Not(q.Exists(q.Match(q.Index('user_by_email'),q.Casefold(email[1])))),
+        q.Get(q.Ref(q.Collection('users'),id[1])),
+        q.Get(q.Match(q.Index('user_by_email'), q.Casefold(email[1])))
+      ),
     );
-
+    
     if (!getUser) {
       return res.status(404).end('NotFound');
     }
 
     if (req.method === 'GET') {
 
-      return res.status(200).json(getUser);
+      return res.status(200).json(getUser.data);
 
     } else if (req.method === 'PUT') {
 
       try {
         const updateUser = await fauna.query(
           q.Update(
-            q.Ref(q.Collection('users'), getUser.ref.id),
+            q.Ref(q.Collection('users'), getUser.data.id),
             {
               data: {
                 level: req.body.data.level,

@@ -1,7 +1,9 @@
 import NextAuth from 'next-auth';
-import { Login, query as q } from 'faunadb';
+import { If, query as q } from 'faunadb';
 import Providers from 'next-auth/providers';
 import { fauna } from '../../../services/fauna';
+import { toast } from 'react-toastify';
+
 
 type Profile = {
   id: number;
@@ -17,6 +19,7 @@ type Data = {
   },
   data: {
     id: number;
+    provider: string;
     name: string;
     login: string;
     email: string;
@@ -24,6 +27,22 @@ type Data = {
     level: number;
     currentExperience: number;
     challengesCompleted: number;
+  }
+}
+
+type User = {
+  data: {
+    data: {
+      id: number;
+      provider: string;
+      name: string;
+      login: string;
+      email: string;
+      avatar_url: string;
+      level: number;
+      currentExperience: number;
+      challengesCompleted: number;
+    }
   }
 }
 
@@ -35,37 +54,31 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_SECRET,
       scope: 'read:user'
     }),
-    /*Providers.LinkedIn({
-      clientId: process.env.LINKEDIN_CLIENT_ID,
-      clientSecret: process.env.LINKEDIN_CLIENT_SECRET
-    }),
-    Providers.Facebook({
-      clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET
-    })*/
+    Providers.Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
+    })
   ],
   callbacks: {
     async signIn(user, account, profile: Profile) {
       const { id, avatar_url, name, email, login } = profile;
-      
+      const { provider } = account
+
       try {
 
-        await fauna.query<Data>(
-          q.If(
-            q.Not(
-              q.Exists(
-                q.Match(
-                  q.Index('user_by_id'),
-                  q.Casefold(profile.id)
-                )
-              )
-            ),
+        const { data } = await fauna.query<Data>(
+          q.If(q.And(
+            q.Not(q.Exists(q.Match(q.Index('user_by_id'), q.Casefold(id)))),
+            q.Not(q.Exists(q.Match(q.Index('user_by_email'), q.Casefold(email)))),
+          ),
             q.Map(
               [
                 [id,
                   {
                     "id": id,
                     "name": name,
+                    "provider": provider,
                     "login": login,
                     "email": email,
                     "avatar_url": avatar_url,
@@ -82,13 +95,27 @@ export default NextAuth({
             ),
             q.Get(
               q.Match(
-                q.Index('user_by_id'),
-                q.Casefold(profile.id)
+                q.Index('user_by_email'),
+                q.Casefold(email)
               )
             )
           )
         )
-        
+
+
+        if (data.provider != provider) {
+          await fauna.query(
+            q.Update(
+              q.Ref(q.Collection('users'), data.id),
+              {
+                data: {
+                  provider: provider,
+                }
+              }
+            )
+          );
+        }
+
         return true;
       } catch {
         return false;

@@ -10,18 +10,20 @@ interface Challenge {
   amount: number;
 }
 
+interface Data {
+  id: number;
+  name: string;
+  avatar_url: string;
+  level: number;
+  currentExperience: number;
+  challengesCompleted: number;
+}
+
 interface User {
   ref: {
     id: string;
   },
-  data: {
-    id: number;
-    name: string;
-    avatar_url: string;
-    level: number;
-    currentExperience: number;
-    challengesCompleted: number;
-  }
+  data: Data;
 }
 
 interface ChallengesContextData {
@@ -57,10 +59,10 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
       if (!session) {
         return
       }
-      const { data: user } = await api.get<User>('/user');
-      setLevel(user.data.level);
-      setCurrentExperience(user.data.currentExperience);
-      setClallengesCompleted(user.data.challengesCompleted);
+      const { data: user } = await api.get<Data>('/user');
+      setLevel(user.level);
+      setCurrentExperience(user.currentExperience);
+      setClallengesCompleted(user.challengesCompleted);
     }
     getUser()
   }, [])
@@ -95,11 +97,11 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     if (!activeChallenge)
       return;
 
-      const session = await getSession();
-      if (!session) {
-        return
-      }
-      
+    const session = await getSession();
+    if (!session) {
+      return
+    }
+
     const { amount } = activeChallenge;
     let finalExperience = currentExperience + amount;
     let finallevel = level;
