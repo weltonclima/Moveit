@@ -1,5 +1,5 @@
 import { signIn } from "next-auth/client";
-import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 import React, { useState } from 'react'
 import { Button, Container } from "./styles";
 
@@ -28,17 +28,6 @@ export function Login() {
           onClick={() => signIn('github')}
         >
           <FaGithub />
-        </Button>
-        <Button
-          type="button"
-          onMouseOver={e => setFocus(true)}
-          onMouseOut={e => setFocus(false)}
-          isActive={focus}
-          isRadius={25}
-          isBorder={false}
-          onClick={() => signIn('auth0')}
-        >
-          <FaGoogle />
         </Button>
       </div>
     </Container>
