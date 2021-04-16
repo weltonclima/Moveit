@@ -36,7 +36,7 @@ export function Login() {
           isActive={focus}
           isRadius={25}
           isBorder={false}
-          onClick={() => signIn('google')}
+          onClick={() => signIn('auth0')}
         >
           <FaGoogle />
         </Button>
