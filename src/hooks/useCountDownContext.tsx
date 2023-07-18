@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { useChallengesContext } from "../hooks/useHooks";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { useChallengesContext } from "./useChallengesContext";
 
 interface CountDownContextData {
   hasFinished: boolean;
@@ -18,7 +18,7 @@ let countDownTimeout: NodeJS.Timeout;
 
 export function CountDownProvider({ children }: CountDownProviderProps) {
   const { startNewChallenge } = useChallengesContext();
-  const [time, setTime] = useState(0.1 * 60);
+  const [time, setTime] = useState(10 * 60);
   const [isActive, setisActive] = useState(false);
   const [hasFinished, setHasFinished] = useState(false);
 
@@ -30,7 +30,7 @@ export function CountDownProvider({ children }: CountDownProviderProps) {
     clearTimeout(countDownTimeout);
     setisActive(false);
     setHasFinished(false);
-    setTime(0.1 * 60);
+    setTime(10 * 60);
   }
 
   useEffect(() => {
@@ -63,3 +63,4 @@ export function CountDownProvider({ children }: CountDownProviderProps) {
 
   );
 }
+export const useCountDownContext = () => useContext(CountDownContext);

@@ -1,6 +1,8 @@
 import { useCountDownContext } from '../../hooks/useHooks';
-import { CountDownButton, 
-  CountDownContainer, DivCountDown } from './styles';
+import {
+  CountDownButton,
+  CountDownContainer, DivCountDown
+} from './styles';
 
 export function CountDown() {
   const { minutes,

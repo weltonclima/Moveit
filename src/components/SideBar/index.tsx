@@ -1,4 +1,4 @@
-import {  getSession, signOut } from "next-auth/client";
+import { getSession, signOut } from "next-auth/client";
 import { useEffect, useState } from "react";
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { FiX } from 'react-icons/fi';

@@ -1,23 +1,24 @@
-import React, { useState } from "react";
-import Head from "next/head";
-import { ExperienceBar } from "../components/ExperienceBar/index";
-import { Profile } from "../components/Profile/index";
-import { CompletedChallenges } from "../components/CompletedChallenges/index";
-import { CountDown } from "../components/CountDown/index";
-import { ChallengeBox } from "../components/ChallengeBox/index";
-import { CountDownProvider } from "../contexts/CountDownContext";
-import { ChallengesProvider } from "../contexts/ChallengesContext";
-import { Login } from "../components/Login/index";
-import { Logo } from "../components/Logo/index";
-import { getSession } from "next-auth/client";
-import {
-  Container, BackLogin,
-  ContainerLogin
-} from "../styles/Home";
-import { SideBar } from "../components/SideBar/index";
-import { LeaderBoard } from "../components/LeaderBoard/index";
 import { GetServerSideProps } from "next";
 import { Session } from "next-auth";
+import { getSession } from "next-auth/client";
+import Head from "next/head";
+import { useState } from "react";
+import { ChallengeBox } from "../components/ChallengeBox/index";
+import { CompletedChallenges } from "../components/CompletedChallenges/index";
+import { CountDown } from "../components/CountDown/index";
+import { ExperienceBar } from "../components/ExperienceBar/index";
+import { LeaderBoard } from "../components/LeaderBoard/index";
+import { Login } from "../components/Login/index";
+import { Logo } from "../components/Logo/index";
+import { Profile } from "../components/Profile/index";
+import { SideBar } from "../components/SideBar/index";
+import { ChallengesProvider } from "../hooks/useChallengesContext";
+import { CountDownProvider } from "../hooks/useCountDownContext";
+import {
+  BackLogin,
+  Container,
+  ContainerLogin
+} from "../styles/Home";
 
 interface HomeProps {
   session: Session

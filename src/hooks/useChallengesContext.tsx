@@ -1,30 +1,11 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { User } from "next-auth";
+import { getSession } from "next-auth/client";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import challenges from '../../challenges.json';
 import { LevelUpModal } from "../components/LevelUpModal/index";
+import { Challenge } from "../interfaces/Challenge";
+import { Data } from "../interfaces/Data";
 import { api } from "../services/api";
-import { getSession } from "next-auth/client";
-
-interface Challenge {
-  type: 'body' | 'eye';
-  description: string;
-  amount: number;
-}
-
-interface Data {
-  id: number;
-  name: string;
-  avatar_url: string;
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
-}
-
-interface User {
-  ref: {
-    id: string;
-  },
-  data: Data;
-}
 
 interface ChallengesContextData {
   level: number;
@@ -82,11 +63,11 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
 
     new Audio('./Notification.mp3').play();
 
-    /*if (Notification.permission === 'granted') {
+    if (Notification.permission === 'granted') {
       new Notification('Novo desafio!', {
         body: `Valendo ${challenge.amount}`
       })
-    }*/
+    }
   }
 
   function resetChallenge() {
@@ -125,7 +106,7 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
       }
     }
 
-    const response = await api.put<User>('/user', body)
+    await api.put<User>('/user', body)
 
   }
 
@@ -148,3 +129,5 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     </ChallengesContext.Provider>
   );
 }
+
+export const useChallengesContext = () => useContext(ChallengesContext);

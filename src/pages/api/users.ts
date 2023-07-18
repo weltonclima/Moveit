@@ -1,23 +1,8 @@
+import { query as q } from 'faunadb';
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
+import { User } from '../../interfaces/User';
 import { fauna } from "../../services/fauna";
-import { query as q } from 'faunadb'
-
-type User = {
-  ref: {
-    id: string;
-  },
-  data: {
-    id: number;
-    name: string;
-    login: string;
-    email: string;
-    avatar_url: string;
-    level: number;
-    currentExperience: number;
-    challengesCompleted: number;
-  }
-}
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });

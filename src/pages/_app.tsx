@@ -1,7 +1,6 @@
-import React from 'react';
 import { Provider } from 'next-auth/client';
+import { AppProps } from 'next/app';
 import { GlobalStyle } from '../styles/global';
-import {AppProps} from 'next/app'
 
 export default function MyApp({ Component, pageProps }:AppProps) {
 

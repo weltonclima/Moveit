@@ -9,9 +9,9 @@ export function Profile() {
 
   return (
     <Container>
-      <img src={session.user.image} alt={session.user.name} />
+      <img src={session?.user?.image} alt={session?.user?.name} />
       <div>
-        <strong>{session.user.name}</strong>
+        <strong>{session?.user?.name}</strong>
         <p>
           <img src="icons/level.svg" alt="Level" />
           Level {level}

@@ -1,6 +1,6 @@
 import { signIn } from "next-auth/client";
+import { useState } from 'react';
 import { FaGithub } from 'react-icons/fa';
-import React, { useState } from 'react'
 import { Button, Container } from "./styles";
 
 export function Login() {
